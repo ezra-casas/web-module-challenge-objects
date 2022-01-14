@@ -9,14 +9,20 @@ const breakfastBurrito = {name: "Breakfast Burrito", price: 16, category:"Breakf
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 1a: Make a function that builds objects🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Add to the function createMenuItems below so it will create objects following the same format found above for latte and breakfastBurrito (name, price, category).  
 The function should:
+
   1. Receive values for the object that will be created as parameters
   2. Create and return an object using the received values 
   
   Example createMenuItem('tacos', 8, 'Lunch') should return {name: 'tacos', price: 8, category: 'Lunch'}
 */
 
-function createMenuItem(/*Your code here*/){
-    /*Your code here*/
+function createMenuItem(name, price, category){
+  const item = {
+    name: name,
+    price: price,
+    category: category,
+  }
+  return item
 }
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 1b: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -28,6 +34,15 @@ Test your createMenuItems function by doing the following:
   
   For example: createMenuItem("pizza",5,"lunch") would return this as the object: {name:"Pizza",price:5,category:"lunch"}
 */
+
+
+let lasagna = createMenuItem('Lasagna', 13.5, 'Lunch')
+let pizza = createMenuItem('Pizza', 13.5, 'Lunch')
+let salad = createMenuItem('Salad', 13.5, 'Lunch');
+
+console.log(lasagna)
+console.log(pizza)
+console.log(salad)
 
 
 
@@ -47,9 +62,16 @@ const burger = {
   name: "Burger", 
   price: 18, 
   category: "Lunch", 
-  
+  discount(person){
+    if(person === 'student' || person === 'teacher'){
+      let discountPrice = this.price - (this.price * 0.25)
+      return discountPrice;
+    }else{
+      let discountPrice = this.price - (this.price * 0.1)
+      return discountPrice;
+    }
+  }
 }
-
 
 
 ///////////////Reviews (MVP)///////////////////
@@ -69,7 +91,7 @@ Using the reviews array above:
   1. log only Julius' feedback to the console - no function needed 
 */
 
-
+console.log(reviews[5]);
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 4: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
@@ -77,8 +99,8 @@ Reyna's feedback is missing! Use what you know to do the following: (no function
   1. Add this feedback to Reyna's rating - "this place is chill with really cool people, great for getting work done on weekdays"
   2. log the reviews array to the console to check your work
 */
-
-
+// array[array.length -1].key = ""
+reviews[7].feedback = "this place is chill with really cool people, great for getting work done on weekdays"
 
 
 
@@ -91,8 +113,13 @@ Write a function that creates an object with name, rating, feedback, add the new
   4. should return the resulting array
 */
 
-function addReview(/*Your Code Here */){
-  /*Your Code Here */
+function addReview(array, name, rating, feedback){
+  array.push({
+    name: name,
+    rating: rating,
+    feedback: feedback,
+  })
+  return array
 }
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -103,11 +130,12 @@ Use the getReviewByIndex function below to do the following:
   2. Receive a number which is the desired index in the array
   3. The function should return the following string: "{name} gave the restaurant a {rating} star review, and their feedback was: {feedback}"
   For example: getReviewByIndex(reviews,0) would return: "Daniela gave the restaurant a 5 star review, and their feedback was: Beautiful atmosphere and wonderful vegan options!"
-*/
+*/ 
 
 
-function getReviewByIndex(/*Your code here*/) {
-  /*Your code here*/
+function getReviewByIndex(array, index) {
+  let review = array[index];
+  return `${review.name} gave the restaurant a ${review.rating} star review, and their feedback was: ${review.feedback}`
 }
 
 
@@ -125,10 +153,10 @@ Use the getLastReview function below to do the following:
 */
 
 
-function getLastReview(/*Your code here*/) {
-  /*Your code here*/
+function getLastReview(array) {
+  let lastReview = array[array.length - 1];
+  return `${lastReview.name} gave the restaurant a ${lastReview.rating} star review, and their feedback was: ${lastReview.feedback}`
 } 
-
 
 
 ///////////////🍔☕️🍽 STRETCH🍔☕️🍽////////////////////
@@ -147,9 +175,16 @@ Use the getReviewsByRating function below to do the following:
   ]
 */
 
- function getReviewByRating(/* code here */) {
-    /* code here */
+function getReviewByRating(array, rating) {
+  let reviewRatings = [];
+
+  for(let i = 0; i < array.length; i++) {
+    if(array[i].rating === rating) {
+      reviewRatings.push(array[i])
+    }
   }
+  return reviewRatings;
+}
 
   
 /* 💪💪💪💪💪💪💪💪💪💪 STRETCH 2: 💪💪💪💪💪💪💪💪💪💪   
@@ -165,9 +200,17 @@ Use the getLongReviews function below to do the following:
   ]
 */
 
-function getLongReviews(/* code here */) {
-    /* code here */
+function getLongReviews(array) {
+
+  let largeReviews = [];
+
+  for(let i = 0; i < array.length; i++){
+    if(array[i].feedback.split(' ').length > 15){
+      largeReviews.push(array[i].feedback);
+    }
   }
+  return largeReviews;
+}
   
 
 /* 💪💪💪💪💪💪💪💪💪💪 STRETCH 3: 💪💪💪💪💪💪💪💪💪💪 
